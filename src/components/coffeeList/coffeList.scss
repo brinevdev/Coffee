@@ -1,0 +1,19 @@
+.coffeeList {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    justify-content: space-between;
+    row-gap: 30px;
+}
+
+@media(max-width:768px){
+    .coffeeList {
+        grid-template-columns: repeat(2,auto);
+        justify-content: space-around;
+    }
+}
+@media(max-width:520px){
+    .coffeeList {
+        grid-template-columns: auto;
+        justify-content: center;
+    }
+}

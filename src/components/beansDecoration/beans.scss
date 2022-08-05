@@ -1,0 +1,11 @@
+.beans {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    &::before,&::after {
+        content: '';
+        width: 60px;
+        border-bottom: 1px solid #000;
+    }
+}

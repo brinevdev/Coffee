@@ -1,0 +1,57 @@
+.about-it {
+    padding: 70px 0px 30px;
+    &__container {
+        display: flex;
+        gap: 40px;
+    }
+    &__image {
+
+    }
+    &__title {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 35px;
+        color: #000000;
+        margin-bottom: 21px;
+    }
+    &__decoration {
+        margin-bottom: 25px;
+    }
+   .coffee {
+        &__country {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 20px;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+        &__description {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 20px;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+        &__price {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 20px;
+            color: #000000;
+        }
+   }
+}
+
+@media(max-width:768px){
+    .about-it {
+        &__container {
+            flex-direction: column;
+        }
+        &__image {
+            text-align: center;
+            img {max-width: 100%;}
+        }
+        &__title {
+            text-align: center;
+        }
+    }
+}
