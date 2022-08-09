@@ -19,6 +19,7 @@ class Footer extends Component {
                             <ul className="menu__list">
                             <li><NavLink to="/" className="menu__link">Coffee house</NavLink></li>
                             <li><NavLink to="/ourCoffee" className="menu__link">Our coffee</NavLink></li>
+                            <li><NavLink to="/basket" className="menu__link">Yor purchases</NavLink></li>
                             </ul>
                         </nav>
                     </div>

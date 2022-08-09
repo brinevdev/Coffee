@@ -6,6 +6,7 @@ import CoffeeHouse from './pages/CofeeHouse';
 import coffeeImage from './resources/img/coffee_placeholder.png';
 import AboutCoffee from './pages/AboutCoffee';
 import NotFound from './pages/NotFound';
+import Basket from './pages/Basket';
 class App extends Component {
   constructor(props){
     super(props);
@@ -21,9 +22,44 @@ class App extends Component {
           ],
       temp:'',
       country:'',
+      basket:[],
   }
   }
     
+  addToBasket = (e,id) => {
+    e.preventDefault();
+    const basket = this.state.basket;
+    let productIndex = basket.findIndex((item) => item.id == id);
+    if (productIndex != -1){
+      basket[productIndex].count++;
+    } else {
+      basket.push({
+        id,
+        count:1,
+      })
+    }
+    this.setState({
+      basket
+    })
+  }
+  
+  getBasket = (basket) => {
+    const coffeeList = this.state.coffeeList;
+    const basketItems = basket.map(({id,count})=>{
+      const coffeeIndex = coffeeList.findIndex((item) => item.id == id)
+      return {
+        count,
+        ...coffeeList[coffeeIndex],
+        }
+    });
+    const totalSum = basketItems.reduce((acc,next) => acc + parseFloat(next.price) * next.count, 0);
+    return {
+      basketItems,
+      totalSum:totalSum.toFixed(2),
+    }
+  }
+
+
   filterCoffee = (coffeList,temp,country) => {
     if (country && country != 'all') coffeList = coffeList.filter(item=>item.country == country);
     if (temp) return coffeList.filter(item=>item.name.toUpperCase().startsWith(temp.toUpperCase()));
@@ -43,13 +79,15 @@ class App extends Component {
   }
 
   render() {
-    const {coffeeList,temp, country} = this.state;
+    const {coffeeList,temp, country,basket} = this.state;
     const filteredList = this.filterCoffee(coffeeList,temp, country);
+    const basketList = this.getBasket(basket);
     return (
       <Routes>
           <Route path='/' element={<CoffeeHouse/>}/>
-          <Route path='/ourCoffee' element={<OurCoffee coffeeList={filteredList} onSearch = {this.onSearch} onFilter = {this.onFilter}/>}/>
+          <Route path='/ourCoffee' element={<OurCoffee coffeeList={filteredList} onSearch = {this.onSearch} onFilter = {this.onFilter} addToBasket = {this.addToBasket}/>}/>
           <Route path='/ourCoffee/:id' element={<AboutCoffee coffeeList = {this.state.coffeeList}/>}/>
+          <Route path='/basket' element={<Basket  basketList = {basketList} />}/>
           <Route path='*' element={<NotFound/>}/>
       </Routes>
   );
