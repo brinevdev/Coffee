@@ -21,7 +21,7 @@ class OurCoffee extends Component {
 
     render(){
         
-        const {coffeeList,onSearch,onFilter} = this.props;
+        const {coffeeList,onSearch,onFilter,addToBasket} = this.props;
         return (
             <>
                 <Header/>
@@ -67,7 +67,7 @@ class OurCoffee extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <CoffeeList coffeeList = {coffeeList}/>
+                            <CoffeeList coffeeList = {coffeeList} addToBasket = {addToBasket}/>
                         </div>
                     </div>
                 </div>
