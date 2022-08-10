@@ -43,6 +43,19 @@ class App extends Component {
     })
   }
   
+  changeProductCounter = (id,i) => {
+    const basket = this.state.basket
+    this.setState((state) => {
+      return {
+        basket: basket.map((item)=>{
+          if (item.id == id) {
+            return {...item, count:item.count + i}
+          }
+          return item
+        })
+      }
+    });
+  }
   getBasket = (basket) => {
     const coffeeList = this.state.coffeeList;
     const basketItems = basket.map(({id,count})=>{
@@ -87,7 +100,7 @@ class App extends Component {
           <Route path='/' element={<CoffeeHouse/>}/>
           <Route path='/ourCoffee' element={<OurCoffee coffeeList={filteredList} onSearch = {this.onSearch} onFilter = {this.onFilter} addToBasket = {this.addToBasket}/>}/>
           <Route path='/ourCoffee/:id' element={<AboutCoffee coffeeList = {this.state.coffeeList}/>}/>
-          <Route path='/basket' element={<Basket  basketList = {basketList} />}/>
+          <Route path='/basket' element={<Basket  basketList = {basketList} changeProductCounter = {this.changeProductCounter}/>}/>
           <Route path='*' element={<NotFound/>}/>
       </Routes>
   );

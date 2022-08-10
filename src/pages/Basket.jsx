@@ -7,15 +7,15 @@ import './style/basket.scss';
 class Basket extends Component {
 
     render() {
-        const {basketList} = this.props;
+        const {basketList, changeProductCounter} = this.props;
         const {basketItems,totalSum} = basketList;
-        if (basketItems.length == 0) return (
+        if (totalSum == '0.00') return (
           <>
             <Header/>
             <main className="main">
                 <div className="ourcoffee">
                         <div className="container">
-                            <h1 className="ourcoffee__title">Our Coffee </h1>
+                            <h1 className="ourcoffee__title">Your purchases</h1>
                         </div>
                     </div>
                <div className="container">
@@ -31,22 +31,22 @@ class Basket extends Component {
                 <main className="main">
                     <div className="ourcoffee">
                         <div className="container">
-                            <h1 className="ourcoffee__title">Our Coffee </h1>
+                            <h1 className="ourcoffee__title">Your purchases</h1>
                         </div>
                     </div>
                     <div className="container">
                         <div className="basket">
-                            <div className="basket__title">Your purchases</div>
                             <div className="basket__items">
                             {basketItems.map(({id,name,count,country,price})=>{
+                                if (count == 0) return null;
                             return ( 
                                     <div className="basket__item" key={id}>
                                         <div className="item__info">
                                         <span>{name}</span> 
                                         <div className="item__count">
-                                            <div className="plus">+</div>
+                                            <div className="plus" onClick={()=>changeProductCounter(id,1)}>+</div>
                                             {count}
-                                            <div className="minus">-</div>
+                                            <div className="minus" onClick={()=>changeProductCounter(id,-1)}>-</div>
                                         </div>
                                         </div>
                                         <span>{country}</span>
