@@ -8,8 +8,8 @@ class Basket extends Component {
 
     render() {
         const {basketList, changeProductCounter} = this.props;
-        const {basketItems,totalSum} = basketList;
-        if (totalSum == '0.00') return (
+        const {basketItems,totalSum,itemsCount} = basketList;
+        if (itemsCount == 0) return (
           <>
             <Header/>
             <main className="main">

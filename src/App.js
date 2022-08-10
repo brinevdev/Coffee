@@ -12,42 +12,39 @@ class App extends Component {
     super(props);
     this.state = {
       coffeeList:[
-          {id:1,name:"AROMISTICO Coffee 1 kg",img:coffeeImage,price:'6.99$',country:'Brazil'},
-          {id:2,name:"AROMISTICO Coffee 2 kg",img:coffeeImage,price:'12$', country:'Brazil'},
-          {id:3,name:"ARABICA Coffee 1 kg",img:coffeeImage,price:'5.99$', country:'Kenya' },
-          {id:4,name:"ARABICA Coffee 2 kg",img:coffeeImage,price:'10$', country:'Kenya'},
-          {id:5,name:"BLUE MAUNTIN Coffee 1 kg",img:coffeeImage,price:'6.99$',country:'Brazil'},
-          {id:6,name:"ROBUSTA Coffee 1 kg",img:coffeeImage,price:'7.99$',country:'Columbia'},
-          {id:7,name:"TIMIKO Coffee 1 kg",img:coffeeImage,price:'8.30$',country:'Columbia'},
+          {id:1,name:"AROMISTICO Coffee 1 kg",img:coffeeImage,price:'6.99$',country:'Brazil',count:0},
+          {id:2,name:"AROMISTICO Coffee 2 kg",img:coffeeImage,price:'12$', country:'Brazil',count:0},
+          {id:3,name:"ARABICA Coffee 1 kg",img:coffeeImage,price:'5.99$', country:'Kenya',count:0 },
+          {id:4,name:"ARABICA Coffee 2 kg",img:coffeeImage,price:'10$', country:'Kenya',count:0},
+          {id:5,name:"BLUE MAUNTIN Coffee 1 kg",img:coffeeImage,price:'6.99$',country:'Brazil',count:0},
+          {id:6,name:"ROBUSTA Coffee 1 kg",img:coffeeImage,price:'7.99$',country:'Columbia',count:0},
+          {id:7,name:"TIMIKO Coffee 1 kg",img:coffeeImage,price:'8.30$',country:'Columbia',count:0},
           ],
       temp:'',
       country:'',
-      basket:[],
+      basket:{},
   }
   }
     
   addToBasket = (e,id) => {
     e.preventDefault();
-    const basket = this.state.basket;
-    let productIndex = basket.findIndex((item) => item.id == id);
-    if (productIndex != -1){
-      basket[productIndex].count++;
-    } else {
-      basket.push({
-        id,
-        count:1,
-      })
-    }
-    this.setState({
-      basket
-    })
+    this.setState((state) => {
+      return {
+        coffeeList: state.coffeeList.map((item)=>{
+          if (item.id == id) {
+            return {...item, count:item.count + 1}
+          }
+          return item
+        })
+      }
+    });
   }
   
   changeProductCounter = (id,i) => {
     const basket = this.state.basket
     this.setState((state) => {
       return {
-        basket: basket.map((item)=>{
+        coffeeList: state.coffeeList.map((item)=>{
           if (item.id == id) {
             return {...item, count:item.count + i}
           }
@@ -56,19 +53,12 @@ class App extends Component {
       }
     });
   }
-  getBasket = (basket) => {
-    const coffeeList = this.state.coffeeList;
-    const basketItems = basket.map(({id,count})=>{
-      const coffeeIndex = coffeeList.findIndex((item) => item.id == id)
-      return {
-        count,
-        ...coffeeList[coffeeIndex],
-        }
-    });
-    const totalSum = basketItems.reduce((acc,next) => acc + parseFloat(next.price) * next.count, 0);
+
+  getBasket = () => {
     return {
-      basketItems,
-      totalSum:totalSum.toFixed(2),
+      basketItems: this.state.coffeeList.filter(({count})=>count > 0),
+      totalSum: this.state.coffeeList.reduce((acc,next) => acc + parseFloat(next.price) * next.count, 0).toFixed(2),
+      itemsCount: this.state.coffeeList.filter(({count})=>count > 0).length,
     }
   }
 
