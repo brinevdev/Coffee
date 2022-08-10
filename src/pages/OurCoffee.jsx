@@ -6,6 +6,9 @@ import Footer from "../components/footer/Footer";
 import BeansDecoration from '../components/beansDecoration/BeansDecoration';
 import girlPhoto from '../resources/img/girl.png'
 import CoffeeList from '../components/coffeeList/CoffeeList';
+import { ToastContainer, toast } from 'react-toastify';
+
+  
 
 
 class OurCoffee extends Component {
@@ -70,6 +73,7 @@ class OurCoffee extends Component {
                             <CoffeeList coffeeList = {coffeeList} addToBasket = {addToBasket}/>
                         </div>
                     </div>
+                    <ToastContainer limit={5}/>
                 </div>
                 <Footer/>
             </>

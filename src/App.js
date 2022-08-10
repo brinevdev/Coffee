@@ -7,6 +7,8 @@ import coffeeImage from './resources/img/coffee_placeholder.png';
 import AboutCoffee from './pages/AboutCoffee';
 import NotFound from './pages/NotFound';
 import Basket from './pages/Basket';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class App extends Component {
   constructor(props){
     super(props);
@@ -37,6 +39,9 @@ class App extends Component {
           return item
         })
       }
+    });
+    toast.success("The coffee has been added", {
+      position: toast.POSITION.TOP_RIGHT
     });
   }
   
