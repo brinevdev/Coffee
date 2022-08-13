@@ -3,9 +3,7 @@ import './style/coffeeHouse.scss';
 import Header from "../components/header/header";
 import Footer from "../components/footer/Footer";
 import BeansDecoration from "../components/beansDecoration/BeansDecoration";
-import { Fragment } from "react";
-import Card from "../components/card/Card";
-import coffeeImage from '../resources/img/coffee_placeholder.png';
+
 
 class CoffeeHouse extends Component {
 
@@ -42,16 +40,7 @@ class CoffeeHouse extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="our-best">
-                    <div className="our-best__container container">
-                        <h2 className="our-best__title title">Our best</h2>
-                        <div className="our-best__list">
-                             <Card img = {coffeeImage} title ='AROMISTICO Coffee 1 kg' country='Brazil' price = '12$' id={1}/>
-                             <Card img = {coffeeImage} title ='AROMISTICO Coffee 1 kg' country='Brazil' price = '12$' id={1}/>
-                             <Card img = {coffeeImage} title ='AROMISTICO Coffee 1 kg' country='Brazil' price = '12$' id={1}/>
-                        </div>
-                    </div>
-                </div>   
+   
             </main>   
             <Footer/>
         </>
