@@ -2,6 +2,7 @@ import { Component, Fragment } from "react";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/header";
 import './style/basket.scss';
+import coffeeImage from './../resources/img/coffee_placeholder.png';
 
 
 class Basket extends Component {
@@ -19,7 +20,7 @@ class Basket extends Component {
                         </div>
                     </div>
                <div className="container">
-                <div style={{padding:'30px 15px',fontSize:'24px',textAlign:'center'}}>The backet is empty</div>
+                <div style={{padding:'30px 15px',fontSize:'24px',textAlign:'center'}}>The basket is empty</div>
                </div>
             </main>
             <Footer/>
@@ -41,6 +42,7 @@ class Basket extends Component {
                                 if (count == 0) return null;
                             return ( 
                                     <div className="basket__item" key={id}>
+                                        <div className="basket__image"><img src={coffeeImage} alt="" /> </div>
                                         <div className="item__info">
                                         <span>{name}</span> 
                                         <div className="item__count">
@@ -50,7 +52,7 @@ class Basket extends Component {
                                         </div>
                                         </div>
                                         <span>{country}</span>
-                                        <span>{price}</span>
+                                        <span>{price} x {count} = {parseFloat(price)*count}$</span>
                                     </div>
                                 )
                             })}
