@@ -1,5 +1,4 @@
 import './style/aboutCoffee.scss';
-import { Fragment } from "react";
 import Header from "../components/header/header";
 import Footer from "../components/footer/Footer";
 import { useParams } from 'react-router-dom';

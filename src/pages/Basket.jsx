@@ -1,15 +1,16 @@
-import { Component, Fragment } from "react";
+import { Fragment } from "react";
 import Footer from "../components/footer/Footer";
 import Header from "../components/header/header";
 import './style/basket.scss';
 import coffeeImage from './../resources/img/coffee_placeholder.png';
 
 
-class Basket extends Component {
+function Basket(props){
 
-    render() {
-        const {basketList, changeProductCounter} = this.props;
+          
+        const {basketList, changeProductCounter} = props;
         const {basketItems,totalSum,itemsCount} = basketList;
+        
         if (itemsCount == 0) return (
           <>
             <Header/>
@@ -26,6 +27,7 @@ class Basket extends Component {
             <Footer/>
           </>
         )
+        
         return (
            <>
              <Header/>
@@ -64,7 +66,6 @@ class Basket extends Component {
             <Footer/>
            </>
     )
-}
 }
 
 export default Basket;
