@@ -1,8 +1,8 @@
 import {Fragment,useState } from "react";
-import Footer from "../components/footer/Footer";
-import Header from "../components/header/header";
-import './style/basket.scss';
-import coffeeImage from './../resources/img/coffee_placeholder.png';
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/header";
+import './basket.scss';
+import coffeeImage from './../../resources/img/coffee_placeholder.png';
 import { ToastContainer, toast } from 'react-toastify';
 
 

@@ -1,12 +1,12 @@
 import './App.css';
 import { useState} from 'react';
 import {Routes,Route} from 'react-router-dom';
-import OurCoffee from './pages/OurCoffee';
-import CoffeeHouse from './pages/CofeeHouse';
+import OurCoffee from './pages/OurCoffee/OurCoffee';
+import CoffeeHouse from './pages/CoffeeHouse/CoffeeHouse';
 import coffeeImage from './resources/img/coffee_placeholder.png';
-import AboutCoffee from './pages/AboutCoffee';
-import NotFound from './pages/NotFound';
-import Basket from './pages/Basket';
+import AboutCoffee from './pages/AboutCoffee/AboutCoffee';
+import NotFound from './pages/NotFound/NotFound';
+import Basket from './pages/Basket/Basket';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

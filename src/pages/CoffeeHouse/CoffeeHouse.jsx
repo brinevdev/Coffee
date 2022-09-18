@@ -1,7 +1,7 @@
-import './style/coffeeHouse.scss';
-import Header from "../components/header/header";
-import Footer from "../components/footer/Footer";
-import BeansDecoration from "../components/beansDecoration/BeansDecoration";
+import './coffeeHouse.scss';
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/Footer";
+import BeansDecoration from "../../components/beansDecoration/BeansDecoration";
 
 
 function CoffeeHouse(){
@@ -15,10 +15,10 @@ function CoffeeHouse(){
                     <h1 className="about-coffee__title">Everything You Love About Coffee</h1>
                     <div className="about__decoration"><BeansDecoration/></div>
                     <div className="about-coffee__subtitle">We makes every day full of energy and taste<br/>Want to try our beans?</div>
-                    <div className="about-coffee__button"><a className="button">More</a></div>
+                    <a  href="#about" className="about-coffee__button"><a className="button">More</a></a>
                 </div>    
             </div> 
-            <div className="about-us">
+            <div className="about-us" id="about">
                 <div className="about-us__container container">
                     <h2 className="about-us__title title">About Us</h2>
                     <div className="about-us__decoration"><BeansDecoration/></div>

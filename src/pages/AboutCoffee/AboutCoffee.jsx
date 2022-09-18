@@ -1,9 +1,9 @@
-import './style/aboutCoffee.scss';
-import Header from "../components/header/header";
-import Footer from "../components/footer/Footer";
+import './aboutCoffee.scss';
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/Footer";
 import { useParams } from 'react-router-dom';
-import BeansDecoration from '../components/beansDecoration/BeansDecoration';
-import placeHolder from '../resources/img/coffee_placeholder_big.jpg';
+import BeansDecoration from '../../components/beansDecoration/BeansDecoration';
+import placeHolder from '../../resources/img/coffee_placeholder_big.jpg';
 
 
 function AboutCoffee({coffeeList}){

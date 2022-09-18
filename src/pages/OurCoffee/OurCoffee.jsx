@@ -1,10 +1,10 @@
-import './style/ourCoffee.scss';
+import './ourCoffee.scss';
 import { Fragment } from "react";
-import Header from "../components/header/header";
-import Footer from "../components/footer/Footer";
-import BeansDecoration from '../components/beansDecoration/BeansDecoration';
-import girlPhoto from '../resources/img/girl.png'
-import CoffeeList from '../components/coffeeList/CoffeeList';
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/Footer";
+import BeansDecoration from '../../components/beansDecoration/BeansDecoration';
+import girlPhoto from './../../resources/img/girl.png'
+import CoffeeList from '../../components/coffeeList/CoffeeList';
 import { ToastContainer, toast } from 'react-toastify';
 
   
