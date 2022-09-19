@@ -6,4 +6,6 @@
 * filters
 * searching
 * shopping basket
+* notifications
+* checkout form with validation
 
