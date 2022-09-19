@@ -5,19 +5,23 @@ import Footer from "../../components/footer/Footer";
 import BeansDecoration from '../../components/beansDecoration/BeansDecoration';
 import girlPhoto from './../../resources/img/girl.png'
 import CoffeeList from '../../components/coffeeList/CoffeeList';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import {changeFilter,seacrh} from './../../actions/actions';
 
   
 
 
 function OurCoffee(props){
 
+    const dispatch = useDispatch()
+
     const onCountryFilter = (e,onFilter) => {
         const items = e.target.closest('.filter__items').querySelectorAll('.filter__item');
         items.forEach((item)=>item.classList.remove('active'));
         if (e.target.classList.contains('filter__item')) {
             e.target.classList.add('active');
-            onFilter(e.target.getAttribute('data-country'));
+            dispatch(changeFilter((e.target.getAttribute('data-country'))));
         }
     }
      
@@ -55,7 +59,7 @@ function OurCoffee(props){
                         <div className="shop__navigation navigation">
                             <div className="navigation__search search">
                                 <div className="search__lable">Lookiing for</div>
-                                <input type="text" className="search__input" onChange={(e)=>onSearch(e.target.value)}/>
+                                <input type="text" className="search__input" onChange={(e)=>onSearch(dispatch(seacrh(e.target.value)))}/>
                             </div>
                             <div className="navigation__filters filter">
                                 <div className="filter__lable lable">Our filters</div>

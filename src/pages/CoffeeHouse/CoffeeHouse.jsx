@@ -15,7 +15,7 @@ function CoffeeHouse(){
                     <h1 className="about-coffee__title">Everything You Love About Coffee</h1>
                     <div className="about__decoration"><BeansDecoration/></div>
                     <div className="about-coffee__subtitle">We makes every day full of energy and taste<br/>Want to try our beans?</div>
-                    <a  href="#about" className="about-coffee__button"><a className="button">More</a></a>
+                    <div  className="about-coffee__button"> <a href="#about" className='button'>More</a> </div>
                 </div>    
             </div> 
             <div className="about-us" id="about">

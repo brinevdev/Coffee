@@ -4,15 +4,28 @@ import Header from "../../components/header/header";
 import './basket.scss';
 import coffeeImage from './../../resources/img/coffee_placeholder.png';
 import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch, useSelector } from "react-redux";
+import {addCoffee,removeCoffee} from './../../actions/actions';
 
 
 
 
 
 
-function Basket(props) {
+function Basket() {
+    
+const {coffeeList} = useSelector(state =>state)    
+const  getBasket = () => {
+    return {
+      basketItems: coffeeList.filter(({count})=>count > 0),
+      totalSum: coffeeList.reduce((acc,next) => acc + parseFloat(next.price) * next.count, 0).toFixed(2),
+      itemsCount: coffeeList.filter(({count})=>count > 0).length,
+    }
+  }
+
     const [order,setOrder] = useState(false);
-    const {basketList:{itemsCount}} = props;
+    const basket = getBasket();
+    const {itemsCount} = basket;
     return (
         <>
             <Header/>
@@ -24,7 +37,7 @@ function Basket(props) {
                 </div>
                 { itemsCount == 0 ? <EmptyBasket/> : null}
                 { order ? <OrderForm setOrder={setOrder} order={order}/> : null}
-                { itemsCount > 0 && !order ? <InnerBasket {...props} order = {order} setOrder = {setOrder}/> : null}
+                { itemsCount > 0 && !order ? <InnerBasket basket = {basket} order = {order} setOrder = {setOrder}/> : null}
             </main>
             <Footer/>
             <ToastContainer limit={1}/>
@@ -170,9 +183,16 @@ const OrderForm = (props) => {
 
 const InnerBasket = (props) => {
    
-    const {basketList, changeProductCounter,order,setOrder} = props;
-    const {basketItems,totalSum,itemsCount} = basketList;
+    const {basket,order,setOrder} = props;
+    const {basketItems,totalSum} = basket;
+    const dispatch = useDispatch();
 
+    const onAdd = (id) => {
+        dispatch(addCoffee(id));
+    }
+    const onRemove = (id) => {
+        dispatch(removeCoffee(id));
+    }
     return (
         <div className="container">
             <div className="basket">
@@ -185,9 +205,9 @@ const InnerBasket = (props) => {
                             <div className="item__info">
                             <span>{name}</span> 
                             <div className="item__count">
-                                <div className="plus" onClick={()=>changeProductCounter(id,1)}>+</div>
+                                <button className="plus" onClick={() => onAdd(id)}>+</button>
                                 {count}
-                                <div className="minus" onClick={()=>changeProductCounter(id,-1)}>-</div>
+                                <button className="minus" onClick={() => onRemove(id)}>-</button>
                             </div>
                             </div>
                             <span>{country}</span>

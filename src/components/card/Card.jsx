@@ -1,10 +1,22 @@
 import './card.scss';
 import coffeeImage from './../../resources/img/coffee_placeholder.png';
+import { addCoffee } from './../../actions/actions';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function Card(props){
-
-    const {img,name,country,price,id, addToBasket} = props;
+    const dispatch = useDispatch();
+    const {img,name,country,price,id} = props;
     const link = `/ourCoffee/${id}`;
+
+    const onAdd = (e,id) => {
+        e.preventDefault();
+        dispatch(addCoffee(id))
+        toast.success("The coffee has been added", {
+            position: toast.POSITION.TOP_RIGHT
+          });
+    }
+
     return (
         <div className="card">
             <a href={link} >
@@ -15,7 +27,7 @@ function Card(props){
             <div className="card__price">{price}</div>
             <a href="#" 
             style={{padding:'15px 20px',textAlign:'center',outline:"2px solid"}} 
-            onClick={(e)=>addToBasket(e,id)}>add to basket</a>
+            onClick={(e)=>onAdd(e,id)}>add to basket</a>
         </div>
     )
     
