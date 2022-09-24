@@ -4,11 +4,13 @@ import Footer from "../../components/footer/Footer";
 import { useParams } from 'react-router-dom';
 import BeansDecoration from '../../components/beansDecoration/BeansDecoration';
 import placeHolder from '../../resources/img/coffee_placeholder_big.jpg';
+import { useSelector } from 'react-redux';
 
 
-function AboutCoffee({coffeeList}){
+function AboutCoffee(){
     const {id} = useParams();
-    const {name,country,price} = coffeeList[id];
+    const coffeeList = useSelector(state => state.coffeeList)
+    const {name,country,price} = coffeeList.find((coffee) => coffee.id == id);
     return(
             <>
                 <Header/>
