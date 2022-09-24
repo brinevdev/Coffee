@@ -1,7 +1,7 @@
 import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {Fragment,useState } from "react";
-import {addCoffee,removeCoffee} from './../../actions/actions';
+import {addCoffee,removeCoffee} from './../../components/coffeeSlice/coffeeSlice';
 import OrderForm from "../../components/OrderForm/OrderForm";
 import Basket from "./Basket";
 import Footer from "../../components/footer/Footer";

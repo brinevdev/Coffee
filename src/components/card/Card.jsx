@@ -1,6 +1,6 @@
 import './card.scss';
 import coffeeImage from './../../resources/img/coffee_placeholder.png';
-import { addCoffee } from './../../actions/actions';
+import { addCoffee } from './../coffeeSlice/coffeeSlice';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 

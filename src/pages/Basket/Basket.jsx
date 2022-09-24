@@ -26,7 +26,7 @@ const Basket = (props) => {
                             </div>
                             </div>
                             <span>{country}</span>
-                            <span>{price} x {count} = {parseFloat(price)*count}$</span>
+                            <span>{price} x {count} = {(parseFloat(price)*count).toFixed(2)}$</span>
                         </div>
                     )
                 })}
