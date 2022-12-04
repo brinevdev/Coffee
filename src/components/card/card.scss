@@ -28,4 +28,15 @@
         line-height: 20px;
         text-align: right;
     }
+    .button {
+        padding: 15px 20px;
+        text-align: center;
+        outline: 2px solid;
+        background:#E35C00;
+        color: #fff;
+        text-transform: uppercase;
+        &:hover {
+            background:#b34a04;
+        }
+    }
 }

@@ -21,8 +21,9 @@ const coffeeSlice = createSlice({
     name:'coffee',
     initialState,
     reducers: {
-        filter: (state,action) => {state.filter = action.payload},
+        countryFilter: (state,action) => {state.country = action.payload},
         search: (state,action) => {state.search = action.payload},
+        priceFilter: (state, action) => {state.price = action.payload},
         addCoffee: (state,action) => {
            state.coffeeList = state.coffeeList.map((item)=>{
                 if (item.id == action.payload) {
@@ -46,4 +47,4 @@ const {reducer,actions} = coffeeSlice;
 
 export default reducer;
 
-export const {filter,search,addCoffee,removeCoffee} = actions;
+export const {countryFilter,search,addCoffee,removeCoffee,priceFilter} = actions;

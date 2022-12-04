@@ -25,9 +25,7 @@ function Card(props){
             <h3 className="card__title"><a href={link}>{name}</a></h3>
             <div className="card__country">{country}</div>
             <div className="card__price">{price}</div>
-            <a href="#" 
-            style={{padding:'15px 20px',textAlign:'center',outline:"2px solid"}} 
-            onClick={(e)=>onAdd(e,id)}>add to basket</a>
+            <a href="#" className = "button" onClick={(e)=>onAdd(e,id)}>add to basket</a>
         </div>
     )
     

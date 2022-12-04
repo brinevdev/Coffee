@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 20px;
     text-align: center;
     color: #000000;
@@ -56,22 +56,22 @@
         color: #000000;
     }
 }
-.decoration-line {
-    margin: 0 auto;
-    width: 240px;
-    border-bottom: 1px solid #000;
-}
-
-.shop__coffee-list {
+.shop__container {
     padding-top: 30px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    justify-content: space-between;
 }
 .navigation {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 60px;
+    flex-direction: column;
+    padding: 0px 15px;
+    gap: 30px;
     .search {
         display: flex;
+        flex-direction: column;
+        gap: 10px;
         &__lable {
             margin-right: 20px;
         }
@@ -92,12 +92,15 @@
     }
     .filter {
         display: flex;
-        gap: 5px;
+        flex-direction: column;
+        gap: 10px;
         &__lable {
             margin-right: 5px;
         }
         &__items {
             display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         &__item {
             cursor: pointer;
@@ -111,7 +114,23 @@
             }
         }
     }
-    
+    .price {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+    .sort {
+        select {
+            margin-left: 10px;
+        }
+        select, option {
+            padding: 5px 10px;
+            background-color: #fff;
+            outline: none;
+            border: 1px solid #000;
+            font-size: 16px;
+        }
+    }
 }
 
 @media(max-width:996px){

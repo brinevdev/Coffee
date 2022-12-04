@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 
 function CoffeeList() {
     
-    const {coffeeList,filter,search} = useSelector(state=>state);
-    let filteredCoffeeList = filter ? coffeeList.filter((coffee)=>coffee.country == filter || filter == 'all') : coffeeList;
+    const {coffeeList,country,search, price} = useSelector(state=>state);
+    let filteredCoffeeList = country && country !== 'all' ? coffeeList.filter((coffee)=>coffee.country == country) : coffeeList;
     filteredCoffeeList = search ? filteredCoffeeList.filter((coffee)=>coffee.name.toLowerCase().startsWith(search.toLowerCase())) : filteredCoffeeList;
+    filteredCoffeeList = price ? filteredCoffeeList.filter((coffee)=>Math.floor(parseFloat(coffee.price)) < price) : filteredCoffeeList;
 
     if (filteredCoffeeList.length == 0) return <div className='notFound'>Oops nothing was found</div>
 

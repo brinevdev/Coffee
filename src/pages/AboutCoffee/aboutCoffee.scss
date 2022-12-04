@@ -37,8 +37,21 @@
             font-size: 14px;
             line-height: 20px;
             color: #000000;
+            margin-bottom: 15px;
         }
    }
+   .button {
+    padding: 15px 20px;
+    text-align: center;
+    outline: 2px solid;
+    background:#E35C00;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    &:hover {
+        background:#b34a04;
+    }
+}
 }
 
 @media(max-width:768px){
