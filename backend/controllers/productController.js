@@ -1,8 +1,24 @@
 const Product = require('./../models/Product');
 
 const getAllProducts = async (req, res) => {
+    const { country, price, title, sortBy } = req.query;
+    const queryObject = {}
+    if (country) {
+        queryObject.country = country;
+    }
+    if (price) {
+        queryObject.price = {'$lte':price}
+    }
+    if (title) {
+        queryObject.title = { $regex: title, $options: 'i' };
+    }
     try {
-        const products = await Product.find({})
+        let result = Product.find(queryObject);
+        if (sortBy) {
+            const [field, value] = sortBy.split('.');
+            result = result.sort({[field]:value})
+        }
+        const products = await result;
         res.status(200).json({
             products,   
         })
