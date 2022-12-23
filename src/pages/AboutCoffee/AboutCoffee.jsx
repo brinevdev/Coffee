@@ -1,19 +1,23 @@
 import './aboutCoffee.scss';
-import { useState } from 'react';
-import Header from "../../components/header/header";
-import Footer from "../../components/footer/Footer";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { getProduct } from '../../components/coffeeSlice/coffeeSlice';
 import BeansDecoration from '../../components/beansDecoration/BeansDecoration';
 import placeHolder from '../../resources/img/coffee_placeholder_big.jpg';
-import { useSelector } from 'react-redux';
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/Footer";
 
 
 function AboutCoffee(){
-
-    const [amount, setAmount] = useState(1);
+    const dispatch = useDispatch();
     const {id} = useParams();
-    const coffeeList = useSelector(state => state.coffeeList);
-    const {name,country,price} = coffeeList.find((coffee) => coffee.id == id);
+    const {title,country,price} = useSelector(state => state.product) || {}
+    
+    useEffect(() => {
+        dispatch(getProduct(id));
+    },[])
+
     return(
             <>
                 <Header/>
@@ -28,7 +32,7 @@ function AboutCoffee(){
                                 <img src={placeHolder} alt="" />
                         </div>
                         <div className="about-it__body">
-                            <div className="about-it__title">{name}</div>
+                            <div className="about-it__title">{title}</div>
                             <div className="about-it__decoration">
                                 <BeansDecoration/>
                             </div>
@@ -44,7 +48,6 @@ function AboutCoffee(){
                         
                    </div>
                 </div>
-    
                 <Footer/>
             </>
         )

@@ -1,9 +1,9 @@
-.basket{
+.shopping-cart{
     padding: 20px 0px;
     &__items {
         padding: 20px 15px;
         display: grid;
-        grid-template-columns: repeat(2,auto);
+        grid-template-columns: repeat(3,auto);
         justify-content: space-between;
         row-gap: 30px;
     }
@@ -81,7 +81,7 @@
 
 
 @media(max-width:768px){
-    .basket__items {
+    .shopping-cart__items {
             justify-content: center;
             grid-template-columns: repeat(1,auto);
         }

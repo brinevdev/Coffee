@@ -1,45 +1,70 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import e from "cors";
+import { act } from "react-dom/test-utils";
+import { APIPATH } from "../../variables";
 
+export const getAllProducts = createAsyncThunk('coffee/getAllProducts', async (filters) => {
+  const filterParams = Object.entries(filters).map(params => params.join('=')).join('&');
+  const res = await fetch(`${APIPATH}/products/?${filterParams}`)
+  return await res.json();
+  }
+)
 
+export const getProduct = createAsyncThunk('coffee/getProduct', async (id) => {
+  const res = await fetch(`${APIPATH}/products/${id}`);
+  return await res.json();
+})
 
 const initialState = {
-    coffeeList:[
-        {id:1,name:"AROMISTICO Coffee 1 kg",price:'6.99$',country:'Brazil',count:0},
-        {id:2,name:"AROMISTICO Coffee 2 kg",price:'12$', country:'Brazil',count:0},
-        {id:3,name:"ARABICA Coffee 1 kg",price:'5.99$', country:'Kenya',count:0 },
-        {id:4,name:"ARABICA Coffee 2 kg",price:'10$', country:'Kenya',count:0},
-        {id:5,name:"BLUE MAUNTIN Coffee 1 kg",price:'6.99$',country:'Brazil',count:0},
-        {id:6,name:"ROBUSTA Coffee 1 kg",price:'7.99$',country:'Columbia',count:0},
-        {id:7,name:"TIMIKO Coffee 1 kg",price:'8.30$',country:'Columbia',count:0},
-        {id:8,name:"Jacobs Coffee 1 kg",price:'8.30$',country:'Brazil',count:0},
-        {id:9,name:"Jacobs Coffee 2 kg",price:'16.50$',country:'Brazil',count:0},
-        ],
-    
+    shoppingCart: {
+      items: [],
+      totalSum: 0,
+    },
+    products: []
 }
 
 const coffeeSlice = createSlice({
     name:'coffee',
     initialState,
     reducers: {
-        countryFilter: (state,action) => {state.country = action.payload},
-        search: (state,action) => {state.search = action.payload},
-        priceFilter: (state, action) => {state.price = action.payload},
-        addCoffee: (state,action) => {
-           state.coffeeList = state.coffeeList.map((item)=>{
-                if (item.id == action.payload) {
-                  return {...item, count:item.count + 1}
+        addItemToShoppingCart: (state, action) => { 
+          const productIndex = state.shoppingCart.items.findIndex((item) => item._id === action.payload)
+          if (productIndex === -1) {
+            const newProductIndex = state.products.findIndex((item) => item._id === action.payload); 
+            state.shoppingCart.items = [...state.shoppingCart.items, {...state.products[newProductIndex], amount: 1}];  
+          } else {
+            state.shoppingCart.items = state.shoppingCart.items.map((product) => {
+              if (product._id === action.payload) {
+                return {...product, amount: product.amount + 1}
+              }
+              return product;
+            })
+          }
+        },
+        addCoffee: (state, action) => {
+           state.shoppingCart.items = state.shoppingCart.items.map((item)=>{
+                if (item._id === action.payload) {
+                  return {...item, amount:item.amount + 1}
                 }
                 return item
               })
         },
-        removeCoffee: (state,action) => {
-            state.coffeeList = state.coffeeList.map((item)=>{
-                if (item.id == action.payload) {
-                  return {...item, count:item.count - 1}
+        removeCoffee: (state, action) => {
+            state.shoppingCart.items = state.shoppingCart.items.map((item)=>{
+                if (item._id === action.payload) {
+                  return {...item, amount:item.amount - 1}
                 }
                 return item
               })
         }
+    },
+    extraReducers: {
+      [getAllProducts.fulfilled]: (state, action) => {
+        state.products = action.payload.products;
+      },
+      [getProduct.fulfilled]: (state, action) => {
+        state.product = action.payload.product;
+      }
     }
 })
 
@@ -47,4 +72,4 @@ const {reducer,actions} = coffeeSlice;
 
 export default reducer;
 
-export const {countryFilter,search,addCoffee,removeCoffee,priceFilter} = actions;
+export const {addCoffee,removeCoffee, addItemToShoppingCart} = actions;

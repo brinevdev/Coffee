@@ -13,7 +13,7 @@ function Header() {
             <ul className="menu__list">
                 <li><NavLink to="/" className="menu__link">Coffee house</NavLink></li>
                 <li><NavLink to="/ourCoffee" className="menu__link">Our coffee</NavLink></li>
-                <li><NavLink to="/basket" className="menu__link">Your purchases</NavLink></li>
+                <li><NavLink to="/cart" className="menu__link">Shopping cart</NavLink></li>
             </ul>
         </nav>
     </header>

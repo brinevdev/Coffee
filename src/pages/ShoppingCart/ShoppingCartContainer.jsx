@@ -1,25 +1,20 @@
-import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {Fragment,useState } from "react";
-import {addCoffee,removeCoffee} from './../../components/coffeeSlice/coffeeSlice';
+import { ToastContainer } from "react-toastify";
+import {addCoffee,removeCoffee} from '../../components/coffeeSlice/coffeeSlice';
 import OrderForm from "../../components/OrderForm/OrderForm";
-import Basket from "./Basket";
+import ShoppingCart from "./ShoppingCart";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/header";
 
 
-const BasketContainer = () => {
-    const {coffeeList} = useSelector(state =>state)    
+const ShoppingCartContainer = () => {
+    const {shoppingCart} = useSelector(state => state);
+    const itemsCount =  shoppingCart.items.filter(item => item.amount > 0).length;
     const [order,setOrder] = useState(false);
     const dispatch = useDispatch();
 
-    const  getBasket = () => {
-        return {
-        basketItems: coffeeList.filter(({count})=>count > 0),
-        totalSum: coffeeList.reduce((acc,next) => acc + parseFloat(next.price) * next.count, 0).toFixed(2),
-        itemsCount: coffeeList.filter(({count})=>count > 0).length,
-        }
-    }
+ 
 
     const onOrder = (e,setOrder,order) => {
         e.preventDefault()
@@ -34,8 +29,6 @@ const BasketContainer = () => {
     }
 
 
-    const basket = getBasket();
-    const {itemsCount} = basket
   
     return (
         <>
@@ -46,10 +39,10 @@ const BasketContainer = () => {
                         <h1 className="ourcoffee__title">Your purchases</h1>
                     </div>
                 </div>
-                { itemsCount == 0 ? <EmptyBasket/> : null}
+                { itemsCount == 0 ? <EmptyShoppingCart/> : null}
                 { order ? <OrderForm setOrder={setOrder} order={order}/> : null}
-                { itemsCount > 0 && !order ? <Basket 
-                basket = {basket} 
+                { itemsCount > 0 && !order ? <ShoppingCart 
+                shoppingCart= {shoppingCart} 
                 order = {order} 
                 setOrder = {setOrder} 
                 onAdd = {onAdd} 
@@ -62,12 +55,12 @@ const BasketContainer = () => {
 }
 
 
-const EmptyBasket = () => {
+const EmptyShoppingCart = () => {
     return (
         <div className="container">
-        <div style={{padding:'30px 15px',fontSize:'24px',textAlign:'center'}}>The basket is empty</div>
+        <div style={{padding:'30px 15px',fontSize:'24px',textAlign:'center'}}>The shopping cart  is empty</div>
         </div>
     )
 }
 
-export default BasketContainer
+export default ShoppingCartContainer

@@ -29,14 +29,13 @@
         text-align: right;
     }
     .button {
-        padding: 15px 20px;
+        padding: 5px 10px;
         text-align: center;
-        outline: 2px solid;
-        background:#E35C00;
-        color: #fff;
+        outline: 1px solid;
+        color: #000;
         text-transform: uppercase;
         &:hover {
-            background:#b34a04;
+            transform: scale(0.9);
         }
     }
 }
